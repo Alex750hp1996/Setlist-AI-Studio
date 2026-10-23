@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111310" />
+  <meta name="description" content="Organiza tu repertorio y prepara setlists para cada presentación." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Setlist AI Studio</title>
+</head>
+<body>
+  <div class="app-shell is-loading" id="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#inicio" aria-label="Setlist AI Studio">
+        <span class="brand-mark">S<span>✦</span></span>
+        <span class="brand-name">setlist <b>studio</b><small>AI MUSIC PLANNER</small></span>
+      </a>
+      <div class="workspace-label">TU ESTUDIO</div>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <button class="nav-item active" data-page="inicio"><span class="nav-icon">⌂</span>Inicio</button>
+        <button class="nav-item" data-page="biblioteca"><span class="nav-icon">♫</span>Biblioteca <span class="nav-count" id="nav-song-count">0</span></button>
+        <button class="nav-item" data-page="setlists"><span class="nav-icon">☷</span>Mis setlists</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip"><span class="tip-sparkle">✦</span><b>Tu música, tu momento.</b><p>Un gran show empieza con la lista correcta.</p></div>
+        <div class="user-chip"><div class="avatar">AM</div><div><b>Mi repertorio</b><small>Espacio personal</small></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><div class="mobile-brand"><span class="brand-mark">S<span>✦</span></span> setlist studio</div><div class="breadcrumbs"><span>Mi estudio</span><span class="slash">/</span><b id="crumb-current">Inicio</b></div><div class="top-actions"><span class="local-status"><i></i> <span id="storage-status-text">Conectando a la base local…</span></span><button class="icon-button" id="help-button" aria-label="Ayuda">?</button></div></header>
+
+      <section class="page active" id="page-inicio">
+        <div class="welcome-row"><div><div class="eyebrow"><span>✦</span> TU CABINA MUSICAL</div><h1>Prepara algo <em>inolvidable.</em></h1><p class="lead">Tu repertorio está listo. Cuéntame qué tipo de show tienes en mente.</p></div><div class="date-pill"><span class="sun-icon">☼</span><span><small>UN DÍA, UN GRAN SHOW</small><b id="today-label"></b></span></div></div>
+        <div class="hero-card"><div class="hero-copy"><div class="ai-label"><span>✦</span> SETLIST AI</div><h2>La próxima noche<br/>empieza aquí.</h2><p>Describe el evento y el ambiente. Armaré una propuesta con las canciones de tu biblioteca.</p><button class="primary-button" id="start-create">Crear un setlist <span>↗</span></button></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="vinyl"><div class="vinyl-groove"></div><div class="vinyl-label"><span>SAI</span><i>✦</i></div></div><div class="art-note note-one">♫</div><div class="art-note note-two">♪</div><div class="equalizer"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="art-caption">TU REPERTORIO · EN VIVO</span></div></div>
+        <div class="stats-grid"><article class="stat-card"><div class="stat-icon green">♫</div><div><span>CANCIONES EN TU BIBLIOTECA</span><strong id="stat-songs">0</strong></div><button class="card-arrow" data-page="biblioteca">↗</button></article><article class="stat-card"><div class="stat-icon coral">◷</div><div><span>TIEMPO DE MÚSICA</span><strong id="stat-hours">0 <small>min</small></strong></div><div class="stat-note">Aprox. en tu repertorio</div></article><article class="stat-card"><div class="stat-icon violet">☷</div><div><span>SETS GUARDADOS</span><strong id="stat-sets">0</strong></div><button class="card-arrow" data-page="setlists">↗</button></article></div>
+        <div class="section-heading"><div><h2>Tu música, a la mano</h2><p>Accesos rápidos para preparar el próximo show.</p></div></div>
+        <div class="quick-grid"><button class="quick-card" data-action="import"><span class="quick-icon import-icon">⇧</span><span><b>Importa tu repertorio</b><small>Pega una lista y la ordenamos juntos.</small></span><i>↗</i></button><button class="quick-card" data-action="add"><span class="quick-icon add-icon">＋</span><span><b>Agrega una canción</b><small>Guarda los detalles de una canción.</small></span><i>↗</i></button></div>
+        <div class="recent-section"><div class="section-heading"><div><h2>Últimos setlists</h2><p>Sets que preparaste para tus eventos.</p></div><button class="text-button" data-page="setlists">Ver todos <span>→</span></button></div><div id="recent-setlists" class="recent-list"></div></div>
+      </section>
+
+      <section class="page" id="page-biblioteca">
+        <div class="page-heading"><div><div class="eyebrow">TU REPERTORIO</div><h1>Biblioteca <em>musical.</em></h1><p class="lead">Todas tus canciones, en un solo lugar.</p></div><div class="heading-actions"><button class="secondary-button" data-action="import">⇧ <span>Importar lista</span></button><button class="primary-button" data-action="add">＋ <span>Agregar canción</span></button></div></div>
+        <div class="library-toolbar"><label class="search-box"><span>⌕</span><input id="song-search" placeholder="Buscar canción, artista o género..." /></label><select id="category-filter"><option value="">Todas las categorías</option></select><span class="result-count" id="library-count"></span></div>
+        <div class="song-table-wrap"><table class="song-table"><thead><tr><th>CANCIÓN</th><th>ARTISTA</th><th>CATEGORÍA</th><th>ENERGÍA</th><th>DURACIÓN</th><th></th></tr></thead><tbody id="song-rows"></tbody></table><div class="empty-state" id="library-empty"><div class="empty-vinyl">♫</div><h3>Tu repertorio empieza aquí</h3><p>Agrega canciones o importa una lista para preparar tu primer setlist.</p><button class="primary-button" data-action="import">Importar repertorio <span>↗</span></button></div></div>
+      </section>
+
+      <section class="page" id="page-setlists">
+        <div class="page-heading"><div><div class="eyebrow">TUS PRESENTACIONES</div><h1>Mis <em>setlists.</em></h1><p class="lead">Sets listos para volver a subir al escenario.</p></div><div class="heading-actions"><button class="primary-button" id="new-set-top">＋ <span>Crear setlist</span></button></div></div>
+        <div id="setlist-grid" class="setlist-grid"></div>
+        <div class="empty-state set-empty" id="sets-empty"><div class="empty-vinyl">☷</div><h3>Aún no tienes setlists</h3><p>Cuando armes un set para tu próximo evento, aparecerá aquí.</p><button class="primary-button" id="new-set-empty">Crear mi primer set <span>↗</span></button></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="song-dialog" class="modal"><form id="song-form" method="dialog"><div class="modal-head"><div><div class="eyebrow">TU REPERTORIO</div><h2 id="song-dialog-title">Agregar canción</h2></div><button class="close-button" value="cancel" aria-label="Cerrar">×</button></div><input type="hidden" id="song-id"/><div class="form-grid"><label class="field full">Nombre de la canción<input id="song-title" required placeholder="Ej. El Sinaloense"/></label><label class="field">Artista o intérprete<input id="song-artist" placeholder="Ej. Banda El Recodo"/></label><label class="field">Categoría<input id="song-category" list="category-options" placeholder="Ej. Banda"/><datalist id="category-options"><option>Norteñas</option><option>Corridos</option><option>Cumbias</option><option>Románticas</option><option>Banda</option><option>Rancheras</option></datalist></label><label class="field">Género<input id="song-genre" placeholder="Ej. Regional mexicano"/></label><label class="field">Subgénero<input id="song-subgenre" placeholder="Ej. Norteño sax"/></label><label class="field">Tipo de evento<input id="song-event" placeholder="Ej. Fiesta, serenata"/></label><label class="field">Tonalidad<input id="song-key" placeholder="Ej. Sol mayor"/></label><label class="field">Energía<select id="song-energy"><option value="" selected>Pendiente de revisión</option><option value="3">Media</option><option value="1">Tranquila</option><option value="2">Suave</option><option value="4">Movida</option><option value="5">Muy movida</option></select></label><label class="field">Duración<input id="song-duration" type="number" min="30" max="900" value="210"/><small>En segundos · por defecto 3:30</small></label></div><small class="metadata-privacy-note">Completa los metadatos manualmente. Groq solo se usa para ordenar el setlist.</small><div class="modal-footer"><button type="button" class="secondary-button" value="cancel" data-close-dialog>Cancelar</button><button type="submit" class="primary-button" id="song-submit">Guardar canción <span>✓</span></button></div></form></dialog>
+
+  <dialog id="import-dialog" class="modal import-modal"><form id="import-form" method="dialog"><div class="modal-head"><div><div class="eyebrow">IMPORTACIÓN</div><h2>Trae tu repertorio</h2><p>Pega una canción por línea. Puedes separar tus categorías con encabezados.</p></div><button class="close-button" value="cancel" aria-label="Cerrar">×</button></div><div id="import-input-view"><label class="field">Tu lista<textarea id="import-text" rows="9" placeholder="NORTEÑAS&#10;El Sinaloense - Banda El Recodo&#10;La Yaquesita&#10;&#10;CUMBIAS&#10;17 años - Los Ángeles Azules"></textarea></label><div class="import-hint"><span>✦</span> Detectaremos categorías y posibles canciones repetidas.</div></div><div id="import-preview-view" class="hidden"><div class="preview-summary" id="preview-summary"></div><div class="preview-list" id="preview-list"></div><div class="import-hint" id="import-review-hint"><span>✦</span> Completa manualmente los metadatos faltantes.</div></div><div class="modal-footer"><button type="button" class="secondary-button" value="cancel" data-close-dialog>Cancelar</button><button type="button" class="primary-button" id="preview-import">Preparar lista <span>→</span></button><button type="submit" class="primary-button hidden" id="confirm-import">Agregar a mi biblioteca <span>✓</span></button></div></form></dialog>
+
+  <dialog id="builder-dialog" class="modal builder-modal"><form id="builder-form" method="dialog"><div class="modal-head"><div><div class="eyebrow"><span>✦</span> SETLIST AI</div><h2>¿Qué show tienes en mente?</h2><p>Groq ordenará canciones usando solo los metadatos guardados en tu biblioteca.</p></div><button class="close-button" value="cancel" aria-label="Cerrar">×</button></div><label class="field">Describe tu setlist<textarea id="set-prompt" rows="3" placeholder="Ej. Dos horas para una fiesta. Empieza con norteñas, sigue con corridos y termina con cumbias. No repitas artista seguido."></textarea></label><div class="builder-options"><label class="field">Duración del show<select id="set-duration"><option value="30">30 minutos · 9 canciones</option><option value="60">1 hora · 17 canciones</option><option value="90">1 hora y media · 26 canciones</option><option value="120" selected>2 horas · 34 canciones</option><option value="180">3 horas · 51 canciones</option></select></label><label class="field">Nombre del set<input id="set-name" placeholder="Ej. Fiesta de sábado"/></label></div><div class="builder-chips"><button type="button" data-prompt="Empieza tranquilo y sube la energía poco a poco.">↗ De menos a más</button><button type="button" data-prompt="No pongas dos canciones del mismo artista seguidas.">◎ Evita artistas seguidos</button><button type="button" data-prompt="Termina con las canciones más bailables.">♫ Cierre bailable</button></div><div class="builder-note" id="builder-note">Usaremos únicamente las canciones de tu biblioteca.</div><div class="modal-footer"><button type="button" class="secondary-button" data-close-dialog>Cancelar</button><button type="submit" class="primary-button">Generar propuesta <span>✦</span></button></div></form></dialog>
+
+  <dialog id="detail-dialog" class="modal detail-modal"><div id="detail-content"></div></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

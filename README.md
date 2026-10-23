@@ -37,4 +37,3 @@ La conexión usa el SDK oficial de Groq para Python (`groq_setlist.py`), salida 
 ## Si el setlist se genera demasiado rápido o no aparece uso en Groq
 
 La app conserva un generador local como respaldo. Si el servidor activo aún no conoce `/api/setlist`, devolverá 404 y la app usará ese respaldo sin llamar a Groq. Detén el servidor anterior con `Ctrl+C` en su terminal, ejecuta `npm start` desde esta carpeta y recarga la app. Al generar un setlist, la consola del servidor debe mostrar `[Groq setlist] request ...` y, si Groq responde, `[Groq usage] ...`. Si aparece el aviso de respaldo, ahora también mostrará el error que causó el fallback.
-
